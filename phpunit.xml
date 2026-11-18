@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  df-masking unit tests. Run bin/test.sh (the DreamFactory image's PHP plus a PHPUnit 11 phar,
+  in a throwaway container), or vendor/bin/phpunit after composer install in a standalone
+  checkout.
+  tests/bootstrap.php finds the autoloader; tests/TestCase.php provides an isolated Laravel
+  harness (in-memory SQLite, array cache). tests/Live holds scripts that hit a running stack and
+  is not part of this suite.
+-->
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/11.5/phpunit.xsd"
+         bootstrap="tests/bootstrap.php"
+         colors="true"
+         cacheDirectory="/tmp/df-masking-phpunit-cache"
+         executionOrder="default"
+         failOnRisky="true"
+         failOnWarning="true"
+         displayDetailsOnTestsThatTriggerWarnings="true"
+         displayDetailsOnTestsThatTriggerDeprecations="true">
+    <testsuites>
+        <testsuite name="Platform">
+            <directory>tests/Unit/Platform</directory>
+        </testsuite>
+        <testsuite name="Classifier">
+            <directory>tests/Unit/Classifier</directory>
+        </testsuite>
+        <testsuite name="Scanner">
+            <directory>tests/Unit/Scanner</directory>
+        </testsuite>
+        <testsuite name="Masking">
+            <directory>tests/Unit/Masking</directory>
+        </testsuite>
+        <testsuite name="Enforcement">
+            <directory>tests/Unit/Enforcement</directory>
+        </testsuite>
+        <testsuite name="Baselines">
+            <directory>tests/Unit/Baselines</directory>
+        </testsuite>
+        <testsuite name="Integration">
+            <directory>tests/Unit/Integration</directory>
+        </testsuite>
+    </testsuites>
+    <source restrictNotices="true" restrictWarnings="true" ignoreIndirectDeprecations="true">
+        <include>
+            <directory>src</directory>
+        </include>
+    </source>
+    <php>
+        <ini name="error_reporting" value="-1"/>
+        <ini name="memory_limit" value="1G"/>
+        <!-- DreamFactory exceptions error_log() themselves; keep the test output readable -->
+        <ini name="error_log" value="/dev/null"/>
+        <env name="APP_ENV" value="testing"/>
+    </php>
+</phpunit>

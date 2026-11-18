@@ -1,0 +1,7 @@
+/vendor/
+/composer.lock
+/.phpunit.cache/
+/phpunit.phar
+*.log
+tests/Live/__pycache__/
+*.pyc

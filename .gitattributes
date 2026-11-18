@@ -1,0 +1,13 @@
+# Line endings
+* text=auto
+
+# Left out of dist archives (composer --prefer-dist, git archive): tests, test tooling and
+# development scripts. src/, config/, database/, resources/, README, CHANGELOG and LICENSE ship.
+/.gitattributes             export-ignore
+/.gitignore                 export-ignore
+/.github                    export-ignore
+/phpunit.xml                export-ignore
+/phpunit.phar               export-ignore
+/tests                      export-ignore
+/bin/test.sh                export-ignore
+/bin/dev-install.sh         export-ignore

@@ -1,0 +1,441 @@
+{
+  "format": 1,
+  "pack": "dreamfactory.core",
+  "version": "2026.11.1",
+  "notice": "Token lists derived in part from the Microsoft SQL data-classification policy (MIT) and the PostgreSQL Anonymizer identifier dictionary (PostgreSQL License); name lexicons hand-assembled from public-domain census/registry frequency lists.",
+  "lexicons": { "given_names": "lexicon/given_names.txt", "surnames": "lexicon/surnames.txt" },
+
+  "normalizer": {
+    "fold_extra": { "ß": "ss", "ẞ": "ss", "æ": "ae", "œ": "oe", "ø": "o", "ł": "l", "đ": "d", "ð": "d", "þ": "th", "ı": "i" },
+    "strip_prefixes": ["tbl", "tb", "col", "fld", "dim", "fact", "stg", "src", "tmp", "vw"],
+    "compounds": ["ipv4", "ipv6", "e164", "md5", "sha1", "sha256", "sha512", "base64", "x509", "oauth2", "2fa", "icd10"],
+    "abbreviations": {
+      "fname": ["first", "name"], "lname": ["last", "name"], "mname": ["middle", "name"], "fullname": ["full", "name"],
+      "dob": ["birth", "date"], "bday": ["birth", "date"], "geb": ["birth"], "yob": ["birth", "year"],
+      "addr": ["address"], "adr": ["address"], "tel": ["phone"], "msisdn": ["phone"], "ph": ["phone"], "mob": ["mobile"],
+      "pwd": ["password"], "passwd": ["password"], "pw": ["password"], "pswd": ["password"],
+      "acct": ["account"], "acc": ["account"], "cust": ["customer"], "emp": ["employee"], "usr": ["user"], "pt": ["patient"],
+      "no": ["number"], "nr": ["number"], "nbr": ["number"], "num": ["number"], "nro": ["number"], "nmbr": ["number"],
+      "licence": ["license"], "ccn": ["card", "number"], "ccnum": ["card", "number"],       "ipaddress": ["ip", "address"], "ipaddr": ["ip", "address"], "macaddress": ["mac", "address"], "emailaddress": ["email", "address"],
+      "lat": ["latitude"], "lng": ["longitude"], "lon": ["longitude"],
+      "socsec": ["social", "security"], "ssnum": ["ssn"], "expdate": ["exp", "date"], "nm": ["name"], "frst": ["first"], "lst": ["last"], "phn": ["phone"], "eml": ["email"], "mbl": ["mobile"], "bdate": ["birth", "date"], "pstl": ["postal"], "cd": ["code"]
+    },
+    "protected_words": ["passenger", "passport", "bypass", "compass", "passage", "passive", "statement", "scorecard", "discard", "syntax", "mileage", "usage", "message", "language", "average", "percentage", "timezone", "username", "password", "postage", "homage", "teenage", "footage", "voltage", "vintage", "leakage", "dosage", "storage", "village", "manager", "headline", "keyword", "keynote", "nameplate", "namespace", "surname", "birthday", "pinpoint", "address", "telephone", "postcode", "zipcode", "agent", "agenda", "pagename"],
+    "segment": {
+      "min_token_len": 6,
+      "min_piece_len": 4,
+      "short_pieces": ["zip", "dob", "ssn", "tax", "fax", "pin", "tel", "pwd", "cvv", "cvc", "dni", "nie", "nir", "iban", "geo", "gps", "sex", "of", "de", "di", "cc", "ip", "id"],
+      "extra_vocab": ["credit", "card", "number", "first", "last", "middle", "full", "name", "birth", "date", "zip", "code", "postal", "street", "address", "adres", "adresse", "phone", "user", "login", "file", "host", "product", "company", "account", "holder", "expiration", "expiry", "security", "social", "local", "display", "email", "mail", "type", "home", "work", "mobile", "cell", "contact", "line", "billing", "shipping", "mailing", "customer", "client", "employee", "patient", "member", "person", "given", "family", "maiden", "nick", "screen", "secret", "token", "access", "refresh", "private", "public", "license", "driver", "passport", "national", "insurance", "income", "salary", "gender", "blood", "group", "medical", "record", "category", "country", "city", "state", "region", "province", "county", "latitude", "longitude", "place", "year", "month", "time", "stamp", "verified", "status", "count", "flag", "hash", "salt", "answer", "question", "recovery", "routing", "bank", "swift", "sort"]
+    }
+  },
+
+  "context": {
+    "person_nouns": ["user", "customer", "client", "patient", "employee", "staff", "member", "person", "people", "contact", "applicant", "student", "subscriber", "guest", "passenger", "traveler", "traveller", "driver", "owner", "lead", "prospect", "beneficiary", "donor", "volunteer", "resident", "tenant", "candidate", "recipient", "player", "athlete", "author", "buyer", "shopper", "borrower", "insured", "policyholder", "claimant", "citizen", "voter", "teacher", "physician", "doctor", "nurse", "contractor", "spouse", "guardian", "visitor", "attendee", "learner", "pupil", "inmate", "cardholder", "accountholder", "holder", "individual", "recruit", "requester",
+                     "cliente", "clienti", "clientes", "usuario", "usuarios", "empleado", "empleados", "paciente", "pacientes", "pazienti", "persona", "personas", "persone", "alumno", "alumnos", "kunde", "kunden", "benutzer", "nutzer", "mitarbeiter", "personne", "personnes", "utilisateur", "utilisateurs", "employe", "employes", "salarie", "salaries", "utente", "utenti", "dipendente", "dipendenti", "klant", "klanten", "gebruiker", "gebruikers", "medewerker", "medewerkers", "funcionario", "funcionarios", "pessoa", "pessoas", "kund", "kunder", "anvandare", "pracownik", "pracownicy", "uzytkownik", "uzytkownicy", "asiakas", "henkilo", "socio", "socios", "abonne", "patient", "patienten", "mieter", "inquilino", "huesped", "ospite", "studente", "studenti", "estudiante", "etudiant", "schuler"],
+    "modifiers": ["type", "count", "status", "verified", "flag", "enabled", "optin", "optout", "opt", "consent", "template", "format", "length", "valid", "validated", "provider", "preference", "preferences", "sent", "bounced", "bounce", "visibility", "changed", "updated", "expires", "expired", "required", "policy", "last", "mask", "masked", "prefix", "suffix", "domain", "country", "extension", "ext", "date", "time", "timestamp", "ts", "dt", "at", "on", "subscribed", "unsubscribed", "notification", "notifications", "frequency", "confirmed", "confirmation", "hint", "strength", "attempt", "attempts", "reset", "question", "uuid", "key", "hash", "token", "is", "has", "present", "exists", "known", "public", "visible", "hidden", "label", "description", "desc", "issued", "issuer", "issuing", "authority", "expiry", "expiration", "rule", "regex", "pattern", "field", "column"],
+    "address_siblings": ["city", "town", "state", "province", "region", "zip", "postal", "postcode", "country", "county", "locality", "plz", "suburb", "ciudad", "ville", "citta", "stadt", "provincia", "cap", "cp"],
+    "known_clear": [["city"], ["town"], ["state"], ["province"], ["country"], ["region"], ["continent"], ["county"], ["district"], ["locality"], ["company", "name"], ["product", "name"], ["team", "name"], ["created", "at"], ["updated", "at"], ["card", "type"], ["language"], ["currency"], ["timezone"], ["country", "code"], ["state", "code"], ["title"], ["category"], ["description"], ["status"]],
+    "date_roles": ["death", "died", "decease", "deceased", "start", "end", "begin", "finish", "hire", "hired", "created", "creation", "updated", "modified", "deleted", "inserted", "loaded", "loading", "expires", "expiry", "expiration", "issue", "issued", "publication", "published", "release", "released", "founded", "opened", "closed", "joined", "join", "registration", "registered", "order", "ship", "shipped", "delivery", "delivered", "due", "paid", "payment", "event", "game", "match", "season", "effective", "valid", "until", "from", "to", "last", "first", "next", "previous", "scheduled", "schedule", "reorder", "reordered", "expected", "low", "high", "admission", "discharge", "visit", "booking", "arrival", "departure", "transaction", "invoice", "sale", "purchase", "renewal", "termination", "signup", "login", "logout", "seen", "update", "change", "import", "export", "sync", "build", "version"],
+    "created_tokens": ["created", "creation", "inserted", "registered", "registration", "signup", "joined", "updated", "modified"],
+    "surrogate_types": ["id", "bigid", "smallid", "mediumid", "uuid"]
+  },
+
+  "tiers": {
+    "restricted": { "rank": 4, "default_action": "mask" },
+    "identity":   { "rank": 3, "default_action": "mask" },
+    "quasi":      { "rank": 2, "default_action": "label" },
+    "free_text":  { "rank": 1, "default_action": "span" }
+  },
+
+  "scoring": {
+    "name": { "strong": 70, "weak_promoted": 70, "weak_promoted_linked": 55, "strong_in_comment": 45, "weak": 15, "demoted_strong": 15 },
+    "value": { "bands_pct": [80, 60, 30], "strong": [75, 60, 40], "medium": [45, 35, 20], "weak": [20, 10, 0], "min_non_null": 5, "min_distinct_full": 8 },
+    "contradiction": { "min_non_null": 20, "max_shape_pct": 9, "penalty": 40, "penalty_restricted_varied": 25 },
+    "kind_contradiction": { "min_non_null": 20, "min_kind_pct": 90, "penalty": 40 },
+    "free_text": { "strong_hit_rows": 3, "short_min_pct": 10, "hits_strong": 75, "hits_some": 45, "person_table_no_hits": 40, "json_path": 75, "json_path_review": 45, "json_min_leaf_values": 3 },
+    "lineage": 70,
+    "exact_column_rule": 100,
+    "bands": { "enforce": 70, "review": 40, "suggest": 15 },
+    "name_only": { "enforce": 70, "review": 15 },
+    "runner_up_min": 15,
+    "runner_up_max": 3
+  },
+
+  "classes": {
+    "credential": {
+      "tier": "restricted", "label": "Credential or secret", "mask": "redact",
+      "types": ["string", "text", "binary"], "shape": null, "kind_contradiction": ["date", "boolean"],
+      "name": {
+        "strong": [["password"], {"seq": ["passcode"], "types": ["string", "text", "binary", "integer", "smallint", "bigint"]}, ["passphrase"], {"seq": ["pin"], "types": ["string", "text", "integer", "smallint"]}, ["secret"], ["client", "secret"], ["api", "key"], ["apikey"], ["api", "secret"], ["api", "token"], ["access", "key"], ["secret", "key"], ["private", "key"], ["access", "token"], ["refresh", "token"], ["auth", "token"], ["bearer", "token"], ["session", "token"], ["remember", "token"], ["reset", "token"], ["csrf", "token"], ["password", "hash"], ["password", "digest"], ["hashed", "password"], ["password", "salt"], ["otp", "secret"], ["totp", "secret"], ["mfa", "secret"], ["recovery", "code"], ["security", "answer"], ["secret", "answer"], ["webhook", "secret"], ["signing", "key"], ["encryption", "key"], ["ssh", "key"], ["credential"], ["oauth", "token"], ["oauth", "secret"], ["app", "secret"], ["consumer", "secret"], ["auth", "key"], ["license", "key"],
+                   ["contrasena"], ["mot", "de", "passe"], ["motdepasse"], ["passwort"], ["kennwort"], ["wachtwoord"], ["senha"], ["parola", "d", "ordine"], ["losenord"], ["haslo"], ["salasana"], ["adgangskode"], ["passord"], ["sifre"]],
+        "weak": [{ "seq": ["pass"], "promote_if": ["person_table", "table_token:auth", "table_token:login", "table_token:account", "table_token:credential"] },
+                 { "seq": ["token"], "promote_if": ["table_token:session", "table_token:auth", "table_token:password", "table_token:token", "table_token:oauth", "table_token:api"] },
+                 { "seq": ["key"], "promote_if": ["table_token:api", "table_token:credential", "table_token:secret", "table_token:oauth"] },
+                 { "seq": ["salt"], "promote_if": ["person_table", "table_token:auth"] },
+                 { "seq": ["hash"], "promote_if": ["table_token:password", "table_token:auth", "table_token:credential"] }],
+        "negative": [["pass", "rate"], ["pass", "count"], ["pass", "fail"], ["pass", "through"], ["boarding", "pass"], ["token", "count"], ["token", "type"], ["token", "usage"], ["key", "type"], ["key", "id"], ["primary", "key"], ["foreign", "key"], ["sort", "key"], ["password", "hint"], ["public", "key"], ["publishable", "key"], ["cache", "key"], ["idempotency", "key"], ["partition", "key"], ["natural", "key"], ["business", "key"], ["surrogate", "key"], ["lookup", "key"], ["unique", "key"], ["composite", "key"], ["key", "name"], ["key", "code"], ["key", "root"], ["key", "alias"], ["hash", "tag"], ["file", "hash"], ["content", "hash"], ["commit", "hash"], ["git", "hash"], ["block", "hash"], ["image", "hash"], ["pin", "code"], ["pin", "number", "code"], ["secret", "santa"], ["license", "plate"]]
+      },
+      "values": [
+        { "id": "cred.password_hash", "strength": "strong", "discover": true, "prefilter": { "starts_with": ["$", "pbkdf2", "{"], "len": [13, 512] }, "validator": "any_of_regex", "params": { "patterns": {
+            "bcrypt": "^\\$2[abxy]?\\$\\d{2}\\$[./A-Za-z0-9]{53}$",
+            "argon2": "^\\$argon2(?:id|i|d)\\$v=\\d+\\$m=\\d+,t=\\d+,p=\\d+\\$[A-Za-z0-9+/=]+\\$[A-Za-z0-9+/=]+$",
+            "scrypt": "^\\$(?:scrypt|7)\\$[A-Za-z0-9./$+=]{20,}$",
+            "pbkdf2_django": "^pbkdf2_sha(?:1|256|512)\\$\\d+\\$[A-Za-z0-9./+=]+\\$[A-Za-z0-9./+=]+$",
+            "pbkdf2_werkzeug": "^pbkdf2:sha(?:1|256|512):\\d+\\$[A-Za-z0-9./+=]+\\$[0-9a-f]+$",
+            "crypt_sha256": "^\\$5\\$(?:rounds=\\d+\\$)?[./A-Za-z0-9]{1,16}\\$[./A-Za-z0-9]{43}$",
+            "crypt_sha512": "^\\$6\\$(?:rounds=\\d+\\$)?[./A-Za-z0-9]{1,16}\\$[./A-Za-z0-9]{86}$",
+            "md5crypt": "^\\$1\\$[./A-Za-z0-9]{1,8}\\$[./A-Za-z0-9]{22}$",
+            "phpass": "^\\$[PH]\\$[./A-Za-z0-9]{31}$",
+            "ldap_ssha": "^\\{(?:SSHA|SHA|SSHA256|SSHA512|SMD5)\\}[A-Za-z0-9+/=]{20,}$" } } },
+        { "id": "cred.jwt", "strength": "strong", "discover": true, "prefilter": { "starts_with": ["eyJ"] }, "regex": "^eyJ[A-Za-z0-9_-]{8,}\\.eyJ[A-Za-z0-9_-]{8,}\\.[A-Za-z0-9_-]*$", "validator": "jwt_header_has_alg" },
+        { "id": "cred.private_key", "strength": "strong", "discover": true, "prefilter": { "contains": ["-----BEGIN "] }, "regex": "^-----BEGIN (?:RSA |EC |DSA |OPENSSH |ENCRYPTED )?PRIVATE KEY-----" },
+        { "id": "cred.provider_key", "strength": "strong", "discover": true, "prefilter": { "starts_with": ["AKIA", "ASIA", "gh", "github_pat_", "xox", "sk_", "rk_", "AIza", "sk-", "glpat-", "SG."], "len": [16, 300] }, "validator": "any_of_regex", "params": { "patterns": {
+            "aws_access_key": "^(?:AKIA|ASIA)[A-Z0-9]{16}$",
+            "github_token": "^gh[pousr]_[A-Za-z0-9]{36}$",
+            "github_pat": "^github_pat_[A-Za-z0-9_]{22,255}$",
+            "slack_token": "^xox[bpas]-[A-Za-z0-9-]{10,}$",
+            "stripe_secret": "^[sr]k_(?:live|test)_[A-Za-z0-9]{16,}$",
+            "google_api_key": "^AIza[0-9A-Za-z_-]{35}$",
+            "anthropic_key": "^sk-ant-[A-Za-z0-9_-]{20,}$",
+            "openai_key": "^sk-(?:proj-)?[A-Za-z0-9_-]{32,}$",
+            "gitlab_pat": "^glpat-[A-Za-z0-9_-]{20,}$",
+            "sendgrid_key": "^SG\\.[A-Za-z0-9_-]{16,}\\.[A-Za-z0-9_-]{16,}$" } } },
+        { "id": "cred.hex_digest", "strength": "weak", "discover": false, "regex": "^(?:[0-9a-fA-F]{32}|[0-9a-fA-F]{40}|[0-9a-fA-F]{64}|[0-9a-fA-F]{128})$" },
+        { "id": "cred.high_entropy", "strength": "weak", "discover": false, "validator": "secret_entropy", "params": { "min_len": 24, "min_bits_per_char": 3.5, "min_char_classes": 3 } }
+      ]
+    },
+
+    "card_number": {
+      "tier": "restricted", "label": "Payment card number", "mask": "last4",
+      "types": ["string", "text", "bigint", "decimal"], "min_size": 13, "shape": "digits_13_19",
+      "name": {
+        "strong": [["card", "number"], ["credit", "card"], ["credit", "card", "number"], ["debit", "card"], ["debit", "card", "number"], ["cc", "number"], ["primary", "account", "number"], ["creditcard"], ["payment", "card"], ["card", "pan"],
+                   ["tarjeta"], ["numero", "tarjeta"], ["numero", "de", "tarjeta"], ["tarjeta", "credito"], ["carte", "bancaire"], ["numero", "carte"], ["carte", "credit"], ["kartennummer"], ["kreditkarte"], ["kreditkartennummer"], ["carta", "di", "credito"], ["numero", "carta"], ["cartao"], ["numero", "cartao"], ["kaartnummer"], ["creditcardnummer"], ["kortnummer"]],
+        "weak": [{ "seq": ["pan"], "promote_if": ["table_token:payment", "table_token:card", "sibling_class:card_expiry"] }, { "seq": ["card"], "promote_if": ["table_token:payment", "sibling_class:card_expiry"] }, { "seq": ["cc"], "promote_if": ["sibling_class:card_expiry", "table_token:payment"] }],
+        "negative": [["score", "card"], ["card", "type"], ["card", "brand"], ["card", "holder"], ["card", "token"], ["card", "fingerprint"], ["card", "bin"], ["sim", "card"], ["id", "card"], ["business", "card"], ["report", "card"], ["gift", "card", "type"], ["card", "red"], ["card", "yellow"], ["red", "card"], ["yellow", "card"], ["green", "card"], ["wild", "card"], ["sd", "card"], ["memory", "card"], ["loyalty", "card"], ["loyalty", "card", "number"], ["library", "card", "number"], ["membership", "card", "number"], ["gift", "card", "number"], ["member", "card", "number"], ["rewards", "card", "number"], ["library", "card"], ["card", "count"], ["card", "last", "4"], ["card", "last", "four"], ["card", "network"], ["card", "issuer"]]
+      },
+      "values": [
+        { "id": "card.luhn_iin", "strength": "strong", "discover": true, "normalize": "strip_dash_space", "prefilter": { "digits": [13, 19] }, "regex": "^\\d{13,19}$", "validator": "luhn_iin_not_test",
+          "params": { "test_cards": ["4111111111111111", "4242424242424242", "4012888888881881", "4000056655665556", "5555555555554444", "5105105105105100", "2223003122003222", "378282246310005", "371449635398431", "6011111111111117", "6011000990139424", "3530111333300000", "3566002020360505", "30569309025904", "38520000023237", "6200000000000005"] } },
+        { "id": "card.shape", "strength": "weak", "discover": false, "normalize": "strip_dash_space", "regex": "^\\d{13,19}$", "validator": "not_repeated_or_sequential" },
+        { "id": "card.already_masked", "strength": "weak", "discover": false, "regex": "^(?:\\d{4,6}[*xX#•]{4,9}\\d{4}|[*xX#•]{8,15}\\d{4}|(?:[*xX#•]{4}[ -]){3}\\d{4})$", "flag": "already_masked" }
+      ]
+    },
+
+    "card_security": {
+      "tier": "restricted", "label": "Card security code", "mask": "redact",
+      "types": ["string", "text", "integer", "smallint"], "shape": "digits_3_4",
+      "name": {
+        "strong": [["cvv"], ["cvc"], ["csc"], ["cvn"], ["card", "security", "code"], ["card", "verification", "value"], ["card", "verification", "code"], ["security", "code", "card"]],
+        "weak": [{ "seq": ["security", "code"], "promote_if": ["sibling_class:card_number", "table_token:payment", "table_token:card"] }, { "seq": ["cid"], "promote_if": ["sibling_class:card_number"] }],
+        "negative": [["cvv", "result"], ["cvv", "check"], ["cvv", "match"], ["cvc", "check"]]
+      },
+      "values": [ { "id": "cvv.digits", "strength": "weak", "discover": false, "regex": "^\\d{3,4}$" } ]
+    },
+
+    "bank_account": {
+      "tier": "restricted", "label": "Bank account number", "mask": "last4",
+      "types": ["string", "text", "bigint", "decimal"], "shape": "id_like",
+      "name": {
+        "strong": [["iban"], ["bank", "account"], ["bank", "account", "number"], ["account", "iban"], ["bban"], ["clabe"], ["kontonummer"], ["rekeningnummer"], ["numero", "de", "cuenta"], ["numero", "cuenta"], ["cuenta", "bancaria"], ["compte", "bancaire"], ["numero", "de", "compte"], ["conto", "corrente"], ["numero", "conto"], ["bankverbindung"], ["conta", "bancaria"], ["numero", "conta"], ["kontonumer"], ["numer", "konta"], ["checking", "account"], ["savings", "account"], ["direct", "deposit", "account"]],
+        "weak": [{ "seq": ["account", "number"], "promote_if": ["table_token:bank", "table_token:payment", "table_token:payout", "table_token:payroll", "table_token:billing", "sibling_name:routing", "sibling_name:iban", "sibling_name:swift", "sibling_name:bic", "sibling_name:sort"] }],
+        "negative": [["account", "type"], ["account", "status"], ["bank", "account", "type"], ["bank", "name"], ["routing", "number"], ["account", "manager"]]
+      },
+      "values": [
+        { "id": "iban.mod97", "strength": "strong", "discover": true, "normalize": "strip_space_upper", "regex": "^[A-Z]{2}\\d{2}[A-Z0-9]{11,30}$", "validator": "iban_mod97" },
+        { "id": "account.digits", "strength": "weak", "discover": false, "normalize": "strip_dash_space", "regex": "^\\d{6,17}$" }
+      ]
+    },
+
+    "national_id": {
+      "tier": "restricted", "label": "National identifier", "mask": "redact",
+      "types": ["string", "text", "integer", "bigint", "decimal"], "shape": "id_like",
+      "name": {
+        "strong": [["ssn"], ["social", "security", "number"], ["social", "security"], ["soc", "sec", "number"], ["social", "insurance", "number"], ["national", "id"], ["national", "identifier"], ["national", "id", "number"], ["national", "identity", "number"], ["national", "insurance", "number"], ["national", "insurance"], ["nino"], ["insee"], ["nir"], ["numero", "securite", "sociale"], ["securite", "sociale"], ["dni"], ["nie"], ["nuss"], ["bsn"], ["burgerservicenummer"], ["sofinummer"], ["personnummer"], ["personal", "number"], ["henkilotunnus"], ["hetu"], ["cpr"], ["fodselsnummer"], ["pesel"], ["aadhaar"], ["aadhar"], ["identity", "card", "number"], ["id", "card", "number"], ["identity", "number"], ["citizen", "id"], ["personalausweisnummer"], ["personalausweis"], ["ausweisnummer"], ["cedula"], ["curp"], ["nric"], ["mykad"], ["emirates", "id"], ["cnp"], ["egn"], ["oib"], ["jmbg"], ["nhs", "number"], ["documento", "identidad"], ["carta", "identita"], ["carte", "identite"], ["numero", "identite"], ["sin", "number"]],
+        "weak": [{ "seq": ["sin"], "promote_if": ["person_table"] }, { "seq": ["nin"], "promote_if": ["person_table"] }, { "seq": ["id", "number"], "promote_if": ["person_table"] }, { "seq": ["rut"], "promote_if": ["person_table"] }, { "seq": ["government", "id"], "promote_if": ["person_table"] }],
+        "negative": [["sin", "iva"], ["sin", "impuestos"], ["sin", "stock"], ["sin", "cos"], ["nie", "only"]]
+      },
+      "values": [
+        { "id": "ssn_us.dashed", "variant": "us_ssn", "strength": "strong", "discover": true, "regex": "^(?!000|666|9\\d\\d)\\d{3}([- ])(?!00)\\d{2}\\1(?!0000)\\d{4}$", "validator": "ssn_us_rules" },
+        { "id": "ssn_us.digits", "variant": "us_ssn", "strength": "weak", "discover": false, "regex": "^(?!000|666|9\\d\\d)\\d{3}(?!00)\\d{2}(?!0000)\\d{4}$", "validator": "ssn_us_rules" },
+        { "id": "nir_fr", "variant": "fr_nir", "strength": "strong", "discover": true, "normalize": "strip_space_upper", "regex": "^[1-478]\\d{2}(?:0[1-9]|1[0-2]|20|3\\d|4[0-2]|[5-9]\\d)(?:\\d{2}|2[AB])\\d{6}\\d{2}$", "validator": "nir_fr_key97" },
+        { "id": "dni_es", "variant": "es_dni", "strength": "strong", "discover": true, "normalize": "strip_dash_space_upper", "regex": "^\\d{8}[TRWAGMYFPDXBNJZSQVHLCKE]$", "validator": "dni_es_mod23" },
+        { "id": "nie_es", "variant": "es_nie", "strength": "strong", "discover": true, "normalize": "strip_dash_space_upper", "regex": "^[XYZ]\\d{7}[TRWAGMYFPDXBNJZSQVHLCKE]$", "validator": "nie_es_mod23" },
+        { "id": "nino_uk", "variant": "uk_nino", "strength": "strong", "discover": true, "prefilter": { "len": [9, 13] }, "normalize": "strip_space_upper", "regex": "^(?!BG|GB|KN|NK|NT|TN|ZZ)[A-CEGHJ-PR-TW-Z][A-CEGHJ-NPR-TW-Z]\\d{6}[A-D]$" },
+        { "id": "pesel_pl", "variant": "pl_pesel", "strength": "strong", "discover": true, "regex": "^\\d{11}$", "validator": "pesel_pl" },
+        { "id": "pnr_se", "variant": "se_pnr", "strength": "medium", "discover": true, "regex": "^(?:\\d{2})?\\d{6}[-+]\\d{4}$", "validator": "pnr_se" },
+        { "id": "bsn_nl", "variant": "nl_bsn", "strength": "medium", "discover": false, "regex": "^\\d{9}$", "validator": "bsn_nl_11proof" },
+        { "id": "aadhaar_in", "variant": "in_aadhaar", "strength": "medium", "discover": false, "normalize": "strip_space", "regex": "^[2-9]\\d{11}$", "validator": "aadhaar_verhoeff" },
+        { "id": "sin_ca", "variant": "ca_sin", "strength": "medium", "discover": false, "normalize": "strip_dash_space", "regex": "^[1-79]\\d{8}$", "validator": "luhn" }
+      ]
+    },
+
+    "tax_id": {
+      "tier": "restricted", "label": "Tax identifier", "mask": "redact",
+      "types": ["string", "text", "integer", "bigint", "decimal"], "shape": "id_like",
+      "name": {
+        "strong": [["tax", "id"], ["tax", "number"], ["tax", "identification", "number"], ["tax", "identifier"], ["taxpayer", "id"], ["taxpayer", "number"], ["tin"], ["itin"], ["steuer", "id"], ["steuerid"], ["steueridentifikationsnummer"], ["steuernummer"], ["nif"], ["cpf"], ["codice", "fiscale"], ["codicefiscale"], ["utr"], ["tfn"], ["numero", "fiscal"], ["identifiant", "fiscal"], ["numero", "fiscal", "referencia"], ["codigo", "fiscal"], ["cuit"], ["cuil"]],
+        "weak": [{ "seq": ["pan"], "promote_if": ["table_token:tax", "sibling_name:aadhaar", "table_token:kyc"] }, { "seq": ["vat", "number"], "promote_if": ["person_table"] }, { "seq": ["ein"], "promote_if": ["person_table"] }, { "seq": ["rfc"], "promote_if": ["person_table"] }],
+        "negative": [["tax", "rate"], ["tax", "amount"], ["tax", "code"], ["tax", "exempt"], ["tin", "can"]]
+      },
+      "values": [
+        { "id": "itin_us.dashed", "strength": "strong", "discover": true, "regex": "^9\\d{2}([- ])(?:5\\d|6[0-5]|7\\d|8[0-8]|9[0-2]|9[4-9])\\1\\d{4}$" },
+        { "id": "cpf_br", "strength": "strong", "discover": true, "regex": "^(?:\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}|\\d{11})$", "validator": "cpf_br_mod11" },
+        { "id": "cf_it", "strength": "strong", "discover": true, "normalize": "strip_space_upper", "regex": "^[A-Z]{6}[0-9LMNPQRSTUV]{2}[A-EHLMPR-T][0-9LMNPQRSTUV]{2}[A-Z][0-9LMNPQRSTUV]{3}[A-Z]$", "validator": "cf_it_check" },
+        { "id": "pan_in", "strength": "medium", "discover": true, "normalize": "strip_space_upper", "regex": "^[A-Z]{3}[ABCFGHLJPT][A-Z]\\d{4}[A-Z]$" },
+        { "id": "steuer_id_de", "strength": "medium", "discover": false, "normalize": "strip_space", "regex": "^[1-9]\\d{10}$", "validator": "steuer_id_de" }
+      ]
+    },
+
+    "passport_number": {
+      "tier": "restricted", "label": "Passport number", "mask": "redact",
+      "types": ["string", "text"], "shape": "id_like",
+      "name": {
+        "strong": [["passport"], ["passport", "number"], ["passport", "id"], ["pasaporte"], ["numero", "pasaporte"], ["passeport"], ["numero", "passeport"], ["reisepass"], ["reisepassnummer"], ["passnummer"], ["passaporto"], ["paspoort"], ["paspoortnummer"], ["passaporte"], ["paszport"], ["passi"]],
+        "weak": [],
+        "negative": [["passport", "photo"], ["passport", "scan"], ["passport", "image"]]
+      },
+      "values": [ { "id": "passport.shape", "strength": "weak", "discover": false, "normalize": "strip_space_upper", "regex": "^(?=[A-Z0-9]*\\d)[A-Z0-9]{6,9}$" } ]
+    },
+
+    "drivers_license": {
+      "tier": "restricted", "label": "Driver's license number", "mask": "redact",
+      "types": ["string", "text"], "shape": "id_like",
+      "name": {
+        "strong": [["driver", "license"], ["driver", "license", "number"], ["driving", "license"], ["driving", "license", "number"], ["dl", "number"], ["fuhrerschein"], ["fuhrerscheinnummer"], ["permis", "de", "conduire"], ["permis", "conduire"], ["carnet", "de", "conducir"], ["carnet", "conducir"], ["licencia", "de", "conducir"], ["licencia", "conducir"], ["rijbewijs"], ["rijbewijsnummer"], ["patente", "di", "guida"], ["carta", "de", "conducao"], ["korkort"], ["prawo", "jazdy"]],
+        "weak": [{ "seq": ["dl"], "promote_if": ["person_table"] }, { "seq": ["license", "number"], "promote_if": ["person_table"] }],
+        "negative": [["license", "key"], ["license", "type"], ["license", "plate"], ["software", "license"], ["license", "class"], ["dl", "state"], ["dl", "class"], ["license", "state"], ["dl", "endorsement"]]
+      },
+      "values": [ { "id": "dl.shape", "strength": "weak", "discover": false, "normalize": "strip_space_upper", "regex": "^(?=[A-Z0-9-]*\\d)[A-Z0-9-]{5,16}$" } ]
+    },
+
+    "special_category": {
+      "tier": "restricted", "label": "Special-category data (health, beliefs, origin, biometrics, criminal)", "mask": "redact",
+      "types": ["string", "text", "boolean", "integer", "smallint"], "shape": null, "modifiers_apply": false,
+      "name": {
+        "strong": [["diagnosis"], ["diagnoses"], ["diagnosis", "code"], ["icd"], ["icd10"], ["icd", "code"], ["medication"], ["prescription"], ["allergy"], ["blood", "type"], ["blood", "group"], ["disability"], ["hiv"], ["hiv", "status"], ["pregnancy"], ["pregnant"], ["mrn"], ["medical", "record", "number"], ["medical", "condition"], ["medical", "history"], ["medical", "note"], ["health", "condition"], ["health", "status"], ["chronic", "condition"], ["symptom"], ["illness"], ["disease"], ["vaccination", "status"], ["genetic"], ["genotype"], ["dna"], ["mental", "health"], ["psychiatric"], ["substance", "abuse"],
+                   ["religion"], ["religious", "affiliation"], ["religious", "belief"], ["ethnicity"], ["ethnic", "origin"], ["ethnic", "group"], ["racial", "origin"], ["sexual", "orientation"], ["biometric"], ["face", "template"], ["iris", "scan"], ["voice", "print"], ["criminal", "record"], ["criminal", "history"], ["conviction"], ["arrest", "record"], ["trade", "union"], ["union", "membership"], ["political", "party"], ["political", "affiliation"], ["political", "opinion"],
+                   ["diagnostico"], ["diagnostic"], ["diagnose"], ["enfermedad"], ["maladie"], ["krankheit"], ["malattia"], ["doenca"], ["ziekte"], ["medicamento"], ["medicament"], ["medikament"], ["farmaco"], ["alergia"], ["allergie"], ["grupo", "sanguineo"], ["groupe", "sanguin"], ["blutgruppe"], ["gruppo", "sanguigno"], ["bloedgroep"], ["discapacidad"], ["behinderung"], ["disabilita"], ["embarazo"], ["grossesse"], ["schwangerschaft"], ["gravidanza"], ["religione"], ["religiao"], ["religie"], ["konfession"], ["etnia"], ["ethnie"], ["antecedentes", "penales"], ["casier", "judiciaire"], ["vorstrafen"], ["casellario", "giudiziale"]],
+        "weak": [{ "seq": ["injury"], "promote_if": ["person_table", "person_linked"] }, { "seq": ["treatment"], "promote_if": ["person_table", "person_linked"] }, { "seq": ["race"], "promote_if": ["person_table", "person_linked"] }, { "seq": ["faith"], "promote_if": ["person_table", "person_linked"] }, { "seq": ["fingerprint"], "promote_if": ["person_table", "person_linked"] }, { "seq": ["condition"], "promote_if": ["table_token:patient", "table_token:medical", "table_token:health"] }, { "seq": ["orientation"], "promote_if": ["person_table"] }],
+        "negative": [["race", "number"], ["race", "name"], ["race", "date"], ["race", "time"], ["race", "day"], ["race", "track"], ["race", "course"], ["race", "distance"], ["race", "result"], ["race", "position"], ["race", "id"], ["race", "condition"], ["device", "fingerprint"], ["browser", "fingerprint"], ["card", "fingerprint"], ["key", "fingerprint"], ["file", "fingerprint"], ["certificate", "fingerprint"], ["ssh", "fingerprint"], ["treatment", "group"], ["water", "treatment"], ["surface", "treatment"], ["page", "orientation"], ["screen", "orientation"], ["image", "orientation"], ["device", "orientation"]]
+      },
+      "values": [
+        { "id": "icd10.shape", "strength": "weak", "discover": false, "normalize": "upper", "regex": "^[A-TV-Z][0-9][0-9AB](?:\\.?[0-9A-KXZ]{1,4})?$" },
+        { "id": "blood_type.shape", "strength": "weak", "discover": false, "normalize": "upper", "regex": "^(?:A|B|AB|O)\\s?(?:[+-]|POS|NEG|POSITIVE|NEGATIVE)$" }
+      ]
+    },
+
+    "email": {
+      "tier": "identity", "label": "Email address", "mask": "token",
+      "types": ["string", "text"], "shape": "contains_at",
+      "name": {
+        "strong": [["email"], ["e", "mail"], ["email", "address"], ["mail", "address"], ["correo"], ["correo", "electronico"], ["courriel"], ["adresse", "email"], ["adresse", "mail"], ["epost"], ["e", "post"], ["posta", "elettronica"], ["emailadres"], ["emailadresse"], ["sahkoposti"], ["mailadres"]],
+        "weak": [{ "seq": ["mail"], "promote_if": ["person_table"] }],
+        "negative": [["mail", "server"], ["mail", "merge"], ["mail", "date"], ["voice", "mail"], ["mail", "stop"], ["mail", "box"], ["mail", "class"], ["mail", "piece"], ["mail", "room"], ["mail", "drop"], ["mail", "host"], ["email", "domain"], ["mail", "domain"], ["email", "template"], ["email", "subject"], ["email", "body"], ["email", "campaign"]]
+      },
+      "values": [
+        { "id": "email.syntax", "strength": "strong", "discover": true, "prefilter": { "contains": ["@", "."], "len": [6, 254] }, "validator": "email_rfc5322_subset",
+          "regex": "^[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]{1,64}@[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?(?:\\.[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?)*\\.[A-Za-z]{2,63}$" }
+      ]
+    },
+
+    "phone": {
+      "tier": "identity", "label": "Phone number", "mask": "token",
+      "types": ["string", "text", "bigint", "decimal"], "shape": "min_7_digits",
+      "name": {
+        "strong": [["phone"], ["telephone"], ["phone", "number"], ["mobile", "number"], ["mobile", "phone"], ["cellphone"], ["cell", "phone"], ["cell", "number"], ["home", "phone"], ["work", "phone"], ["msisdn"], ["fax"], ["fax", "number"], ["telefono"], ["numero", "telefono"], ["numero", "de", "telefono"], ["telefone"], ["telefon"], ["telefonnummer"], ["numero", "telephone"], ["numero", "de", "telephone"], ["movil"], ["celular"], ["cellulare"], ["handynummer"], ["mobilnummer"], ["telefoonnummer"], ["mobiel"], ["puhelin"], ["puhelinnumero"], ["telefonu"], ["numer", "telefonu"], ["portable", "number"], ["whatsapp", "number"]],
+        "weak": [{ "seq": ["mobile"], "promote_if": ["person_table"] }, { "seq": ["cell"], "promote_if": ["person_table"] }, { "seq": ["contact", "number"], "promote_if": ["person_table"] }, { "seq": ["handy"], "promote_if": ["person_table"] }, { "seq": ["portable"], "promote_if": ["person_table"] }, { "seq": ["gsm"], "promote_if": ["person_table"] }, { "seq": ["whatsapp"], "promote_if": ["person_table"] }],
+        "negative": [["phone", "model"], ["phone", "brand"], ["phone", "os"], ["phone", "code"], ["phone", "country", "code"], ["mobile", "app"], ["mobile", "os"], ["mobile", "device"], ["mobile", "platform"], ["mobile", "version"], ["mobile", "friendly"], ["cell", "id"], ["cell", "tower"], ["cell", "value"], ["cell", "index"], ["cell", "count"], ["cell", "type"], ["cell", "line"], ["fax", "machine"]]
+      },
+      "values": [
+        { "id": "phone.formatted", "strength": "medium", "discover": true, "prefilter": { "charset": "0123456789+()-. ", "digits": [7, 15] }, "regex": "^\\+?[0-9(][0-9 ().\\-]{5,22}[0-9]$", "validator": "phone_structure" },
+        { "id": "phone.digits", "strength": "weak", "discover": false, "regex": "^\\+?[0-9]{7,15}$", "validator": "phone_digits" }
+      ]
+    },
+
+    "person_name": {
+      "tier": "identity", "label": "Person name", "mask": "token",
+      "types": ["string", "text"], "shape": null, "kind_contradiction": ["numeric", "date", "boolean"],
+      "name": {
+        "strong": [["first", "name"], ["last", "name"], ["given", "name"], ["family", "name"], ["middle", "name"], ["full", "name"], ["name", "first"], ["name", "last"], ["name", "full"], ["surname"], ["forename"], ["maiden", "name"], ["birth", "name"], ["contact", "name"], ["legal", "name"], ["card", "holder", "name"], ["cardholder", "name"], ["account", "holder", "name"], ["account", "holder"], ["christian", "name"], ["emergency", "contact"], ["emergency", "contact", "name"], ["next", "of", "kin"], ["spouse", "name"], ["mother", "name"], ["father", "name"], ["middle", "initial"], ["preferred", "name"], ["real", "name"], ["person", "name"],
+                   ["apellido"], ["apellidos"], ["primer", "apellido"], ["segundo", "apellido"], ["nombre", "completo"], ["prenom"], ["nom", "de", "famille"], ["nom", "famille"], ["nom", "complet"], ["vorname"], ["nachname"], ["familienname"], ["geburtsname"], ["cognome"], ["nome", "completo"], ["sobrenome"], ["voornaam"], ["achternaam"], ["tussenvoegsel"], ["fornavn"], ["etternavn"], ["efternavn"], ["fornamn"], ["efternamn"], ["etunimi"], ["sukunimi"], ["imie"], ["nazwisko"], ["jmeno"], ["prijmeni"], ["soyad"], ["soyadi"]],
+        "weak": [{ "seq": ["name"], "promote_if": ["person_table"] }, { "seq": ["nombre"], "promote_if": ["person_table"] }, { "seq": ["nom"], "promote_if": ["person_table"] }, { "seq": ["nome"], "promote_if": ["person_table"] }, { "seq": ["naam"], "promote_if": ["person_table"] }, { "seq": ["navn"], "promote_if": ["person_table"] }, { "seq": ["namn"], "promote_if": ["person_table"] }, { "seq": ["nimi"], "promote_if": ["person_table"] }, { "seq": ["display", "name"], "promote_if": ["person_table"] }, { "seq": ["nickname"], "promote_if": ["person_table"] }, { "seq": ["initials"], "promote_if": ["person_table"] }],
+        "negative": [["product", "name"], ["file", "name"], ["host", "name"], ["company", "name"], ["business", "name"], ["brand", "name"], ["table", "name"], ["column", "name"], ["field", "name"], ["schema", "name"], ["server", "name"], ["domain", "name"], ["app", "name"], ["role", "name"], ["group", "name"], ["team", "name"], ["category", "name"], ["store", "name"], ["street", "name"], ["city", "name"], ["country", "name"], ["venue", "name"], ["event", "name"], ["project", "name"], ["package", "name"], ["publisher", "name"], ["bank", "name"], ["tag", "name"], ["user", "name"], ["site", "name"], ["league", "name"], ["document", "name"], ["class", "name"], ["type", "name"], ["unit", "name"], ["org", "name"], ["organization", "name"], ["organisation", "name"], ["institution", "name"], ["school", "name"], ["hospital", "name"], ["vendor", "name"], ["supplier", "name"], ["merchant", "name"], ["shop", "name"], ["index", "name"], ["key", "name"], ["view", "name"], ["db", "name"], ["database", "name"], ["service", "name"], ["queue", "name"], ["job", "name"], ["task", "name"], ["module", "name"], ["plugin", "name"], ["device", "name"], ["machine", "name"], ["computer", "name"], ["model", "name"], ["color", "name"], ["colour", "name"], ["region", "name"], ["state", "name"], ["province", "name"], ["county", "name"], ["district", "name"], ["location", "name"], ["place", "name"], ["building", "name"], ["room", "name"], ["course", "name"], ["campaign", "name"], ["list", "name"], ["segment", "name"], ["channel", "name"], ["source", "name"], ["sheet", "name"], ["short", "name"], ["long", "name"], ["common", "name"], ["scientific", "name"], ["trade", "name"], ["account", "name"], ["plan", "name"], ["item", "name"], ["menu", "name"], ["dataset", "name"], ["metric", "name"], ["variable", "name"], ["parameter", "name"], ["attribute", "name"], ["feature", "name"], ["fixture", "name"], ["game", "name"], ["award", "name"], ["position", "name"], ["division", "name"], ["conference", "name"], ["season", "name"], ["stadium", "name"], ["arena", "name"], ["airport", "name"], ["station", "name"], ["route", "name"], ["street", "name"], ["neighborhood", "name"], ["department", "name"], ["dept", "name"], ["title", "name"], ["image", "name"], ["nombre", "producto"], ["nombre", "empresa"], ["nom", "produit"], ["nom", "entreprise"], ["nome", "prodotto"], ["nome", "azienda"], ["produkt", "name"], ["firma", "name"], ["firmenname"], ["bedrijfsnaam"], ["ragione", "sociale"]]
+      },
+      "values": [
+        { "id": "name.lexicon", "strength": "medium", "discover": true, "scope": "column", "validator": "person_name_lexicon", "params": { "tokens": [1, 4], "min_capitalized_pct": 60, "min_lexicon_pct": 60, "lexicons": ["given_names", "surnames"] } }
+      ]
+    },
+
+    "street_address": {
+      "tier": "identity", "label": "Street address", "mask": "redact",
+      "types": ["string", "text"], "shape": null, "kind_contradiction": ["numeric", "date", "boolean"],
+      "name": {
+        "strong": [{"seq": ["address"], "requires": "ordinal"}, ["address", "line"], ["street"], ["street", "address"], ["street", "name"], ["street", "line"], ["home", "address"], ["mailing", "address"], ["billing", "address"], ["shipping", "address"], ["postal", "address"], ["residential", "address"], ["residence", "address"], ["delivery", "address"], ["physical", "address"], ["permanent", "address"], ["current", "address"], ["house", "number"], ["street", "number"], ["street", "address", "line"], ["address", "street"],
+                   ["direccion"], ["domicilio"], ["anschrift"], ["strasse"], ["hausnummer"], ["indirizzo"], ["endereco"], ["morada"], ["straat"], ["straatnaam"], ["huisnummer"], ["ulica"], ["osoite"], ["katuosoite"], ["gatuadress"], ["adresse", "postale"], ["numero", "de", "rue"], ["calle"], ["numero", "civico"], ["via", "residenza"], ["logradouro"]],
+        "weak": [{ "seq": ["address"], "promote_if": ["person_table", "sibling_name:city", "sibling_name:zip", "sibling_name:postal", "sibling_name:postcode", "sibling_name:state", "sibling_name:province", "sibling_name:town", "sibling_name:plz", "sibling_name:county", "sibling_name:suburb"] },
+                 { "seq": ["adresse"], "promote_if": ["person_table", "sibling_name:ville", "sibling_name:plz", "sibling_name:city"] },
+                 { "seq": ["adres"], "promote_if": ["person_table", "sibling_name:city", "sibling_name:postcode"] },
+                 { "seq": ["residence"], "promote_if": ["person_table"] }, { "seq": ["adress"], "promote_if": ["person_table", "sibling_name:city", "sibling_name:zip", "sibling_name:postal"] }],
+        "negative": [["email", "address"], ["ip", "address"], ["mac", "address"], ["wallet", "address"], ["web", "address"], ["memory", "address"], ["contract", "address"], ["ipv4", "address"], ["ipv6", "address"], ["server", "address"], ["host", "address"], ["network", "address"], ["bitcoin", "address"], ["crypto", "address"], ["hardware", "address"], ["mail", "address"], ["address", "book"], ["street", "direction"], ["street", "type"], ["residence", "location", "id"], ["adresse", "email"], ["adresse", "mail"], ["adresse", "ip"], ["adresse", "web"], ["url", "address"], ["web", "site", "address"], ["broadcast", "address"]]
+      },
+      "values": [
+        { "id": "street.pattern", "strength": "medium", "discover": true, "prefilter": { "has_digit": true, "has_letter": true, "contains": [" "], "len": [5, 200] }, "regex_any": [
+            "^\\d{1,6}[A-Za-z]?(?:[-/]\\d{1,4})?,?\\s+(?:[\\p{L}0-9.'’-]+\\s+){0,5}(?:street|st|avenue|ave|av|road|rd|way|lane|ln|drive|dr|boulevard|blvd|court|ct|place|pl|square|sq|terrace|ter|parkway|pkwy|highway|hwy|circle|cir|trail|trl|crescent|cres|close|row|alley|aly|loop|path|pike|plaza|run|walk|grove|gardens?|mews)\\.?(?:\\s+(?:n|s|e|w|ne|nw|se|sw|north|south|east|west)\\.?)?(?:\\s*,.*|\\s+(?:apt|suite|ste|unit|#|fl|floor|bldg)\\b.*)?$",
+            "^\\d{1,5}[A-Za-z]?(?:\\s*bis)?,?\\s+(?:rue|avenue|av\\.?|boulevard|bd|chemin|all[ée]e|impasse|place|quai|route)\\s+.+$",
+            "^(?:calle|c/|avenida|avda\\.?|av\\.|paseo|plaza|carrer|camino|carretera|via|viale|piazza|corso|largo|rua|travessa|pra[çc]a|ulica|ul\\.|aleja)\\s+[^,]+?,?\\s+\\d{1,5}[A-Za-z]?\\b.*$",
+            "^(?:p\\.?\\s?o\\.?\\s?box|post\\s+office\\s+box|postfach|apartado(?:\\s+de\\s+correos)?|casella\\s+postale|bo[iî]te\\s+postale)\\s*\\d{1,8}\\b.*$",
+            "^[\\p{L}.' -]*?(?:stra(?:ss|ß)e|str\\.|weg|platz|gasse|allee|ring|damm|ufer|steig|pfad|chaussee|straat|laan|plein|gracht|kade|singel|dijk|vej|gade|gatan|v[äa]gen|gata|katu|tie)\\s+\\d{1,5}[A-Za-z]?\\b.*$"
+          ], "flags": "iu" }
+      ]
+    },
+
+    "date_of_birth": {
+      "tier": "identity", "label": "Date of birth", "mask": "year",
+      "types": ["date", "datetime", "timestamp", "timestamptz", "string", "text", "integer", "smallint"], "shape": "parseable_date",
+      "name": {
+        "strong": [["birth", "date"], ["date", "of", "birth"], ["birthday"], ["birth", "day"], ["born", "on"], ["birth", "year"], ["year", "of", "birth"], ["birth", "dt"], ["fecha", "nacimiento"], ["fecha", "de", "nacimiento"], ["fecha", "nac"], ["date", "naissance"], ["date", "de", "naissance"], ["geburtsdatum"], ["geburtstag"], ["birth", "datum"], ["data", "nascita"], ["data", "di", "nascita"], ["data", "nasc"], ["data", "nascimento"], ["data", "de", "nascimento"], ["geboortedatum"], ["fodelsedatum"], ["fodselsdato"], ["data", "urodzenia"], ["syntymaaika"], ["dogum", "tarihi"]],
+        "weak": [{ "seq": ["born"], "promote_if": ["person_table"] }],
+        "negative": [["birth", "place"], ["birth", "country"], ["birth", "city"], ["birth", "location"], ["birth", "weight"], ["birth", "state"], ["birth", "certificate"], ["birth", "order"], ["birth", "rate"]]
+      },
+      "values": [
+        { "id": "dob.plausible", "strength": "medium", "discover": true, "scope": "column", "validator": "dob_plausibility",
+          "params": { "max_age": 120, "min_parse_pct": 80, "min_plausible_pct": 95, "min_distinct_years": 5, "min_year_iqr": 8, "max_recent_365d_pct": 10, "max_non_midnight_pct": 50, "created_gap_years": 10, "min_created_gap_pct": 90 } }
+      ]
+    },
+
+    "ip_address": {
+      "tier": "identity", "label": "IP address", "mask": "token",
+      "types": ["string", "text"], "shape": "ip_like",
+      "name": {
+        "strong": [["client", "ip"], ["remote", "ip"], ["user", "ip"], ["last", "login", "ip"], ["login", "ip"], ["visitor", "ip"], ["customer", "ip"], ["signup", "ip"], ["registration", "ip"], ["client", "ip", "address"], ["remote", "address"], ["x", "forwarded", "for"], ["origin", "ip"], ["requester", "ip"], ["direccion", "ip"], ["adresse", "ip"], ["indirizzo", "ip"], ["endereco", "ip"]],
+        "weak": [{ "seq": ["ip"], "promote_if": ["person_table", "person_linked", "table_token:session", "table_token:login", "table_token:log", "table_token:audit", "table_token:event", "table_token:visit", "table_token:request", "table_token:access", "table_token:activity", "table_token:click", "table_token:signup", "table_token:order", "table_token:history", "table_token:device", "table_token:connection", "table_token:comment", "table_token:vote", "table_token:pageview", "table_token:analytics"] },
+                 { "seq": ["ip", "address"], "promote_if": ["person_table", "person_linked", "table_token:session", "table_token:login", "table_token:log", "table_token:audit", "table_token:event", "table_token:visit", "table_token:request", "table_token:access", "table_token:activity", "table_token:click", "table_token:signup", "table_token:order", "table_token:history", "table_token:device", "table_token:connection", "table_token:comment", "table_token:vote", "table_token:pageview", "table_token:analytics"] },
+                 { "seq": ["ipv4"], "promote_if": ["person_table", "person_linked", "table_token:session", "table_token:login", "table_token:log", "table_token:audit", "table_token:access"] },
+                 { "seq": ["ipv6"], "promote_if": ["person_table", "person_linked", "table_token:session", "table_token:login", "table_token:log", "table_token:audit", "table_token:access"] },
+                 { "seq": ["source", "ip"], "promote_if": ["table_token:log", "table_token:access", "table_token:audit", "table_token:request", "table_token:login", "table_token:session"] }],
+        "negative": [["ip", "version"], ["ip", "range"], ["ip", "whitelist"], ["ip", "allowlist"], ["ip", "blocklist"], ["ip", "blacklist"], ["ip", "pool"], ["ip", "type"], ["server", "ip"], ["host", "ip"], ["gateway", "ip"], ["router", "ip"], ["dns", "ip"], ["proxy", "ip"], ["ip", "subnet"], ["ip", "mask"], ["ip", "count"], ["ip", "country"]]
+      },
+      "values": [
+        { "id": "ip.v4", "strength": "medium", "discover": true, "prefilter": { "len": [7, 15] }, "regex": "^\\d{1,3}(?:\\.\\d{1,3}){3}$", "validator": "ip_v4", "ignore_if_tokens": ["version", "ver", "build", "release", "revision"], "column_check": { "min_high_octet_pct": 30 } },
+        { "id": "ip.v6", "strength": "medium", "discover": true, "regex": "^[0-9A-Fa-f:.]{2,45}$", "prefilter": { "contains": [":"] }, "validator": "ip_v6", "ignore_if_tokens": ["version", "ver", "build", "release", "revision"] }
+      ]
+    },
+
+    "username": {
+      "tier": "identity", "label": "Username or login", "mask": "token",
+      "types": ["string", "text"], "shape": null, "kind_contradiction": ["date", "boolean"],
+      "name": {
+        "strong": [["username"], ["user", "name"], ["login"], ["login", "name"], ["login", "id"], ["screen", "name"], ["user", "login"], ["user", "handle"], ["sam", "account", "name"], ["user", "principal", "name"], ["benutzername"], ["nombre", "de", "usuario"], ["nombre", "usuario"], ["identifiant"], ["nom", "utilisateur"], ["nom", "d", "utilisateur"], ["gebruikersnaam"], ["nome", "utente"], ["nome", "de", "usuario"], ["nome", "usuario"], ["brukernavn"], ["brugernavn"], ["anvandarnamn"], ["kayttajatunnus"], ["nazwa", "uzytkownika"], ["kullanici", "adi"]],
+        "weak": [{ "seq": ["handle"], "promote_if": ["person_table"] }, { "seq": ["account", "name"], "promote_if": ["person_table"] }, { "seq": ["nick"], "promote_if": ["person_table"] }, { "seq": ["alias"], "promote_if": ["person_table"] }],
+        "negative": [["last", "login"], ["first", "login"], ["failed", "login"], ["login", "date"], ["login", "time"], ["login", "at"], ["login", "attempt"], ["login", "failure"], ["login", "ip"], ["login", "token"], ["login", "url"], ["login", "page"], ["login", "method"], ["login", "success"], ["login", "location"], ["login", "device"], ["login", "source"], ["login", "count"], ["login", "enabled"], ["login", "type"], ["login", "provider"], ["login", "status"], ["login", "history"], ["login", "redirect"], ["login", "id", "provider"]]
+      },
+      "values": [ { "id": "username.shape", "strength": "weak", "discover": false, "regex": "^(?=[A-Za-z0-9._@-]*[A-Za-z])[A-Za-z0-9._@-]{3,64}$" } ]
+    },
+
+    "geo_precise": {
+      "tier": "identity", "label": "Precise geolocation", "mask": "round2",
+      "types": ["decimal", "float", "double", "money", "string", "text"], "shape": "decimal_like",
+      "name": {
+        "strong": [["home", "latitude"], ["home", "longitude"], ["home", "location"], ["home", "coordinate"], ["gps", "location"], ["current", "location", "latitude"], ["residence", "latitude"], ["residence", "longitude"]],
+        "weak": [{ "seq": ["latitude"], "promote_if": ["person_table", "person_linked", "table_token:address", "table_token:home", "table_token:residence", "table_token:delivery", "table_token:checkin", "table_token:tracking"] },
+                 { "seq": ["longitude"], "promote_if": ["person_table", "person_linked", "table_token:address", "table_token:home", "table_token:residence", "table_token:delivery", "table_token:checkin", "table_token:tracking"] },
+                 { "seq": ["coordinate"], "promote_if": ["person_table", "person_linked", "table_token:address", "table_token:home", "table_token:residence", "table_token:delivery"] },
+                 { "seq": ["gps"], "promote_if": ["person_table", "person_linked", "table_token:address", "table_token:home", "table_token:residence", "table_token:delivery", "table_token:tracking"] },
+                 { "seq": ["geolocation"], "promote_if": ["person_table", "person_linked", "table_token:address", "table_token:home", "table_token:residence", "table_token:delivery", "table_token:tracking"] },
+                 { "seq": ["geo", "location"], "promote_if": ["person_table", "person_linked", "table_token:address", "table_token:home", "table_token:residence", "table_token:delivery", "table_token:tracking"] }],
+        "negative": [["trajectory", "coordinate"], ["pitch", "coordinate"], ["screen", "coordinate"], ["image", "coordinate"], ["map", "center", "latitude"]]
+      },
+      "values": [ { "id": "geo.precise", "strength": "medium", "discover": false, "regex": "^-?\\d{1,3}\\.\\d{4,}$", "validator": "geo_range" } ]
+    },
+
+    "postal_code": {
+      "tier": "quasi", "label": "Postal code", "mask": "prefix3",
+      "types": ["string", "text", "integer", "smallint"], "shape": "postal_like",
+      "name": {
+        "strong": [["zip"], ["zipcode"], ["zip", "code"], ["postcode"], ["postal", "code"], ["post", "code"], ["postal"], ["plz"], ["postleitzahl"], ["codigo", "postal"], ["code", "postal"], ["codice", "postale"], ["postnummer"], ["postinumero"], ["kod", "pocztowy"], ["pincode"], ["pin", "code"], ["eircode"], ["cep"], ["postcode", "number"]],
+        "weak": [{ "seq": ["cap"], "promote_if": ["sibling_name:city", "sibling_name:citta", "sibling_name:indirizzo", "sibling_name:address", "sibling_name:comune", "sibling_name:provincia"] }, { "seq": ["cp"], "promote_if": ["sibling_name:city", "sibling_name:ciudad", "sibling_name:ville", "sibling_name:direccion", "sibling_name:adresse"] }],
+        "negative": [["zip", "file"], ["zip", "archive"], ["zip", "compressed"], ["zip", "size"], ["zip", "path"], ["zip", "url"], ["cap", "table"], ["market", "cap"], ["cap", "rate"], ["salary", "cap"], ["cap", "hit"], ["cap", "space"], ["cap", "limit"], ["cp", "id"]]
+      },
+      "values": [
+        { "id": "postal.us_zip4", "strength": "medium", "discover": false, "regex": "^\\d{5}-\\d{4}$" },
+        { "id": "postal.uk", "strength": "medium", "discover": false, "normalize": "upper", "regex": "^[A-Z]{1,2}\\d[A-Z\\d]? ?\\d[A-Z]{2}$" },
+        { "id": "postal.ca", "strength": "medium", "discover": false, "normalize": "upper", "regex": "^[ABCEGHJ-NPRSTVXY]\\d[ABCEGHJ-NPRSTV-Z] ?\\d[ABCEGHJ-NPRSTV-Z]\\d$" },
+        { "id": "postal.nl", "strength": "medium", "discover": false, "normalize": "upper", "regex": "^\\d{4} ?[A-Z]{2}$" },
+        { "id": "postal.numeric", "strength": "weak", "discover": false, "regex": "^\\d{3,6}$" }
+      ]
+    },
+
+    "gender": {
+      "tier": "quasi", "label": "Gender", "mask": "redact",
+      "types": ["string", "text", "integer", "smallint"], "shape": "short_code",
+      "name": {
+        "strong": [["gender"], ["sex"], ["geschlecht"], ["sexo"], ["sexe"], ["genere"], ["genero"], ["geslacht"], ["kjonn"], ["sukupuoli"], ["plec"], ["cinsiyet"], ["gender", "identity"], ["gender", "at", "birth"], ["sex", "at", "birth"], ["sex", "assigned", "at", "birth"]],
+        "weak": [],
+        "negative": [["sex", "offender"], ["gender", "neutral"]]
+      },
+      "values": [ { "id": "gender.values", "strength": "weak", "discover": false, "validator": "in_vocabulary", "column_check": { "max_distinct": 6 },
+                    "params": { "vocabulary": ["m", "f", "male", "female", "man", "woman", "men", "women", "x", "u", "o", "unknown", "other", "nb", "nonbinary", "non-binary", "non binary", "h", "hombre", "mujer", "masculino", "femenino", "masculin", "feminin", "homme", "femme", "w", "d", "weiblich", "mannlich", "maennlich", "divers", "maschio", "femmina", "maschile", "femminile", "vrouw", "v", "boy", "girl", "undisclosed", "prefer not to say", "not specified", "unspecified", "mies", "nainen", "kvinna", "kvinde", "kvinne", "mand", "mann", "k", "e"] } } ]
+    },
+
+    "age": {
+      "tier": "quasi", "label": "Age", "mask": "band",
+      "types": ["integer", "smallint", "bigint", "decimal", "string", "text"], "shape": "small_int",
+      "name": {
+        "strong": [["current", "age"], ["age", "years"], ["age", "in", "years"]],
+        "weak": [{ "seq": ["age"], "promote_if": ["person_table"] }, { "seq": ["edad"], "promote_if": ["person_table"] }, { "seq": ["alter"], "promote_if": ["person_table"] }, { "seq": ["leeftijd"], "promote_if": ["person_table"] }, { "seq": ["idade"], "promote_if": ["person_table"] }, { "seq": ["wiek"], "promote_if": ["person_table"] }, { "seq": ["age", "group"], "promote_if": ["person_table"] }],
+        "negative": [["age", "limit"], ["age", "rating"], ["age", "restriction"], ["min", "age"], ["max", "age"], ["minimum", "age"], ["maximum", "age"], ["age", "gate"], ["age", "bracket", "id"], ["account", "age"], ["data", "age"], ["cache", "age"], ["file", "age"]]
+      },
+      "values": [ { "id": "age.range", "strength": "weak", "discover": false, "regex": "^\\d{1,3}$", "validator": "int_range", "params": { "min": 0, "max": 120 } } ]
+    },
+
+    "card_expiry": {
+      "tier": "quasi", "label": "Card expiry date", "mask": "redact",
+      "types": ["string", "text", "date", "integer", "smallint"], "shape": "expiry_like",
+      "name": {
+        "strong": [["card", "expiry"], ["card", "expiration"], ["card", "expiration", "date"], ["card", "expiry", "date"], ["card", "exp"], ["card", "exp", "date"], ["card", "expires"], ["cc", "exp"], ["cc", "expiry"], ["cc", "expiration"], ["card", "valid", "until"], ["card", "valid", "thru"]],
+        "weak": [{ "seq": ["expiration", "date"], "promote_if": ["sibling_class:card_number", "table_token:payment", "table_token:card"] }, { "seq": ["expiry", "date"], "promote_if": ["sibling_class:card_number", "table_token:payment", "table_token:card"] }, { "seq": ["exp", "date"], "promote_if": ["sibling_class:card_number", "table_token:payment", "table_token:card"] }, { "seq": ["expiry"], "promote_if": ["sibling_class:card_number", "table_token:payment", "table_token:card"] }, { "seq": ["exp", "month"], "promote_if": ["sibling_class:card_number", "table_token:payment", "table_token:card"] }, { "seq": ["exp", "year"], "promote_if": ["sibling_class:card_number", "table_token:payment", "table_token:card"] }, { "seq": ["expiration", "month"], "promote_if": ["sibling_class:card_number", "table_token:payment", "table_token:card"] }, { "seq": ["expiration", "year"], "promote_if": ["sibling_class:card_number", "table_token:payment", "table_token:card"] }, { "seq": ["expiry", "month"], "promote_if": ["sibling_class:card_number", "table_token:payment", "table_token:card"] }, { "seq": ["expiry", "year"], "promote_if": ["sibling_class:card_number", "table_token:payment", "table_token:card"] }],
+        "negative": []
+      },
+      "values": [ { "id": "expiry.shape", "strength": "medium", "discover": false, "regex": "^(?:(?:0[1-9]|1[0-2])\\s?[/-]\\s?(?:\\d{2}|\\d{4})|\\d{4}[/-](?:0[1-9]|1[0-2]))$" } ]
+    },
+
+    "financial_personal": {
+      "tier": "quasi", "label": "Personal income or salary", "mask": "band",
+      "types": ["integer", "bigint", "decimal", "float", "double", "money", "string", "text"], "shape": "numeric_like",
+      "name": {
+        "strong": [["salary"], ["annual", "salary"], ["annual", "income"], ["household", "income"], ["personal", "income"], ["gross", "salary"], ["net", "salary"], ["base", "salary"], ["monthly", "salary"], ["net", "worth"], ["credit", "score"], ["salario"], ["sueldo"], ["salaire"], ["gehalt"], ["stipendio"], ["salaris"], ["jahresgehalt"], ["remuneracion"]],
+        "weak": [{ "seq": ["income"], "promote_if": ["person_table"] }, { "seq": ["wage"], "promote_if": ["person_table"] }, { "seq": ["compensation"], "promote_if": ["person_table"] }, { "seq": ["pay", "rate"], "promote_if": ["person_table"] }, { "seq": ["hourly", "rate"], "promote_if": ["person_table"] }, { "seq": ["revenu"], "promote_if": ["person_table"] }, { "seq": ["einkommen"], "promote_if": ["person_table"] }, { "seq": ["ingresos"], "promote_if": ["person_table"] }, { "seq": ["ingreso"], "promote_if": ["person_table"] }, { "seq": ["reddito"], "promote_if": ["person_table"] }, { "seq": ["inkomen"], "promote_if": ["person_table"] }, { "seq": ["renda"], "promote_if": ["person_table"] }, { "seq": ["earnings"], "promote_if": ["person_table"] }],
+        "negative": [["salary", "cap"], ["salary", "band"], ["salary", "grade"], ["salary", "range"], ["income", "statement"], ["income", "account"], ["income", "category"], ["income", "tax", "rate"]]
+      },
+      "values": [ { "id": "money.amount", "strength": "weak", "discover": false, "regex": "^-?\\d{1,10}(?:\\.\\d{1,2})?$" } ]
+    },
+
+    "free_text_pii": {
+      "tier": "free_text", "label": "Free text containing personal data", "mask": "span",
+      "types": ["string", "text", "json", "jsonb"], "min_size": 64, "shape": null,
+      "profile_gate": { "min_p50_len": 40, "min_prose_pct": 30, "or_min_json_pct": 20 },
+      "name": {
+        "hints": [["notes"], ["note"], ["comment"], ["comments"], ["remarks"], ["description"], ["memo"], ["message"], ["body"], ["content"], ["details"], ["narrative"], ["bio"], ["about"], ["summary"], ["feedback"], ["payload"], ["data"], ["json"], ["metadata"], ["attributes"], ["properties"], ["extra"], ["misc"],
+                  ["notas"], ["observaciones"], ["comentario"], ["commentaire"], ["remarque"], ["bemerkung"], ["kommentar"], ["notiz"], ["nota"], ["osservazioni"], ["opmerking"], ["observacao"]],
+        "strong": [], "weak": [], "negative": []
+      },
+      "spans": [
+        { "detector": "email.syntax", "find": "(?<![A-Za-z0-9.!#$%&'*+/=?^_`{|}~-])[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]{1,64}@[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?(?:\\.[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?)*\\.[A-Za-z]{2,63}(?![A-Za-z0-9-])" },
+        { "detector": "card.luhn_iin", "find": "(?<![0-9])\\d(?:[ -]?\\d){12,18}(?![0-9])" },
+        { "detector": "ssn_us.dashed", "find": "(?<![0-9-])(?!000|666|9\\d\\d)\\d{3}([- ])(?!00)\\d{2}\\1(?!0000)\\d{4}(?![0-9-])" },
+        { "detector": "iban.mod97", "find": "\\b[A-Z]{2}\\d{2}(?: ?[A-Z0-9]{4}){2,7}(?: ?[A-Z0-9]{1,4})?\\b" },
+        { "detector": "nino_uk", "find": "\\b(?!BG|GB|KN|NK|NT|TN|ZZ)[A-CEGHJ-PR-TW-Z][A-CEGHJ-NPR-TW-Z] ?\\d{2} ?\\d{2} ?\\d{2} ?[A-D]\\b" },
+        { "detector": "nir_fr", "find": "\\b[1-478] ?\\d{2} ?(?:0[1-9]|1[0-2]|20|3\\d|4[0-2]|[5-9]\\d) ?(?:\\d{2}|2[AB]) ?\\d{3} ?\\d{3} ?\\d{2}\\b" },
+        { "detector": "dni_es", "find": "\\b\\d{8}-?[TRWAGMYFPDXBNJZSQVHLCKE]\\b" },
+        { "detector": "nie_es", "find": "\\b[XYZ]-?\\d{7}-?[TRWAGMYFPDXBNJZSQVHLCKE]\\b" },
+        { "detector": "phone.formatted", "find": "(?<![\\w.+/-])(?:(?:\\+|00)\\d{1,3}[ .-]?)?(?:\\(\\d{1,4}\\)[ .-]?)?\\d{2,5}(?:[ .-]\\d{2,5}){1,4}(?![\\w/-])" },
+        { "detector": "ip.v4", "find": "(?<![\\d.])(?:\\d{1,3}\\.){3}\\d{1,3}(?![\\d.])" },
+        { "detector": "cred.jwt", "find": "\\beyJ[A-Za-z0-9_-]{8,}\\.eyJ[A-Za-z0-9_-]{8,}\\.[A-Za-z0-9_-]*" },
+        { "detector": "cred.private_key", "find": "-----BEGIN (?:RSA |EC |DSA |OPENSSH |ENCRYPTED )?PRIVATE KEY-----" },
+        { "detector": "cred.provider_key", "find": "(?<![A-Za-z0-9_-])(?:(?:AKIA|ASIA)[A-Z0-9]{16}|gh[pousr]_[A-Za-z0-9]{36}|github_pat_[A-Za-z0-9_]{22,}|xox[bpas]-[A-Za-z0-9-]{10,}|[sr]k_(?:live|test)_[A-Za-z0-9]{16,}|AIza[0-9A-Za-z_-]{35}|sk-ant-[A-Za-z0-9_-]{20,}|glpat-[A-Za-z0-9_-]{20,}|SG\\.[A-Za-z0-9_-]{16,}\\.[A-Za-z0-9_-]{16,})(?![A-Za-z0-9_-])" }
+      ],
+      "json": { "max_depth": 8, "max_leaves": 256, "key_path_classify": true }
+    }
+  }
+}

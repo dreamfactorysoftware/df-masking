@@ -1,0 +1,64 @@
+{
+  "name": "dreamfactory/df-masking",
+  "description": "Data Masking (column classification + response masking) and Compliance baselines for DreamFactory. Commercial (Gold).",
+  "keywords": [
+    "dreamfactory",
+    "data masking",
+    "pii",
+    "classification",
+    "compliance"
+  ],
+  "homepage": "https://www.dreamfactory.com/",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "DreamFactory Team",
+      "email": "code@dreamfactory.com"
+    }
+  ],
+  "support": {
+    "email": "dspsupport@dreamfactory.com",
+    "source": "https://github.com/dreamfactorysoftware/df-masking",
+    "issues": "https://github.com/dreamfactorysoftware/df-masking/issues",
+    "wiki": "https://wiki.dreamfactory.com"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "require": {
+    "php": "^8.3",
+    "ext-json": "*",
+    "ext-mbstring": "*",
+    "laravel/helpers": "^1.8",
+    "dreamfactory/df-core": "~1.0.4",
+    "dreamfactory/df-system": "~0.6.2"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^11.5.3"
+  },
+  "suggest": {
+    "dreamfactory/df-sqldb": "Required for masking: SQL database services (MySQL, PostgreSQL, SQLite, SQL Server, Oracle, Snowflake) are the covered service types.",
+    "dreamfactory/df-compliance": "Designates a root admin; only the root admin may loosen real-value access when one exists.",
+    "dreamfactory/df-limits": "Rate limits, checked by the Compliance baselines.",
+    "dreamfactory/df-logger": "Audit logging, checked by the Compliance baselines."
+  },
+  "autoload": {
+    "psr-4": {
+      "DreamFactory\\Core\\Masking\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "DreamFactory\\Core\\Masking\\Tests\\": "tests/"
+    }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-develop": "0.1.x-dev"
+    },
+    "laravel": {
+      "providers": [
+        "DreamFactory\\Core\\Masking\\ServiceProvider"
+      ]
+    }
+  }
+}
